@@ -1,63 +1,92 @@
-# SUBMISSION
-
-<!-- Fill in every section. The AI Jury studies this file together with the code, the Build Report, the presentation and the Stand's interface. Accepted languages: English, Kazakh, Russian. These hint comments may be deleted. -->
+# SUBMISSION — AURUM-31
 
 ## Concept
 
-<!-- Written by the Team before the code: your own choice, a few sentences per answer. Everything else in the Submission follows from it. -->
+**Enterprise:** AURUM-31 — ашық әдіспен алтын өндіретін ойдан шығарылған кеніштің цифрлық моделі.
 
-**Enterprise:** <!-- Which mining enterprise, or which part of it, the twin represents. -->
+**Users:** Кеніш диспетчері, өндіріс инженері және техника паркін басқарушы.
 
-**Users:** <!-- Who uses the twin. -->
+**Decision:** Самосвал істен шыққанда, жол жабылғанда немесе ауа райы нашарлағанда өндіріс өнімділігінің қалай өзгеретінін бағалау.
 
-**Decision:** <!-- Which decision the twin helps them make. -->
+**Why this choice:** Ашық кеніште тасымалдау техникасының тоқтауы өндіріс тиімділігіне тікелей әсер етеді. Digital Twin технологиясы әртүрлі жағдайларды виртуалды түрде тексеруге мүмкіндік береді.
 
-**Why this choice:** <!-- Why this enterprise, these users and this decision. -->
-
-**Real or fictional:** <!-- A real object: name it and give the sources of its numbers. A fictional one: which real objects it resembles and where its numbers come from. A real object with sourced numbers scores higher. -->
+**Real or fictional:** Ойдан шығарылған кеніш. Телеметрия мен өндіріс параметрлері демонстрациялық мақсатта синтетикалық түрде жасалған. Нақты кәсіпорынның өлшеулері қолданылмайды.
 
 ## Team
 
-<!-- GitHub usernames of the Participants. Other personal data are not required: the repository becomes public after the Freeze (Rules, section 15). -->
-
 | GitHub |
 |---|
-|  |
+| aigerimbeisen006-cell |
 
 ## Mine
 
-<!-- Which part of a mining enterprise the Submission represents (open pit, underground mine, processing plant…), which objects are twins in OpenEgiz, how they are related, and where they are defined in the code. -->
+AURUM-31 ашық алтын кенішіндегі тасымалдау жүйесін модельдейді.
+
+Негізгі объектілер:
+- 4 самосвал;
+- карьер картасы;
+- тасымалдау жолдары;
+- ұсатқыш аймағы.
+
+Python симуляторы техника телеметриясын жасайды. Eclipse Ditto цифрлық егіздердің деректерін сақтайды. Веб-интерфейс техниканың жағдайын көрсетеді.
+
+Негізгі код: `team/aurum31/`.
 
 ## Modules and What-if Scenarios
 
-<!-- Modules: functions on top of the twin, from the Mine Map or your own. What-if Scenarios: changes of an operating condition that can be run on the Stand without changing the code (close a road, stop equipment…). Only what works on the Stand is taken into account. -->
-
-| Module or What-if Scenario | What it does | How to see it on the Stand | How to undo it (scenarios) |
+| Module or What-if Scenario | What it does | How to see it on the Stand | How to undo it |
 |---|---|---|---|
-|  |  |  |  |
+| Mine visualization | Карьер мен самосвалдарды көрсетеді | AURUM-31 веб-интерфейсі | Қажет емес |
+| Truck telemetry | Жылдамдық, жүк және жанармай деректерін көрсетеді | Техника кестесі және API | Қажет емес |
+| Breakdown | Бір самосвалдың тоқтауын модельдейді | «Самосвал істен шықты» | «Қалыпты жұмыс» |
+| Road closure | Жол жабылғандағы тасымалдауды модельдейді | «Жол жабылды» | «Қалыпты жұмыс» |
+| Heavy rain | Жаңбыр кезіндегі қозғалыстың баяулауын модельдейді | «Қатты жаңбыр» | «Қалыпты жұмыс» |
+| Production estimate | Өндіріс өнімділігінің есептік көрсеткішін береді | KPI панелі | Қалыпты сценарийге оралу |
 
 ## What works and what does not
 
-<!-- What has been verified, what is unfinished, which bugs are known. -->
+Жасалған және жергілікті ортада тексерілген:
+- Python HTTP сервері;
+- төрт самосвалдың синтетикалық телеметриясы;
+- Eclipse Ditto API интеграциясы;
+- карьердің веб-картасы;
+- сценарийлерді таңдау;
+- Grafana инфрақұрылымы.
+
+Белгілі мәселе:
+- LIVE KPI көрсеткіштері браузерде тұрақты жаңармайды.
+- Кейбір ескерту элементтері толық жұмыс істемейді.
+- Байқаудың таза Judge Environment ортасында толық автоматты іске қосу әлі тексерілмеген.
 
 ## Data and Assumptions
 
-<!--
-- Synthetic and real data.
-- Sources of parameters: equipment data sheets, reference literature, industrial safety regulations, datasets.
-- Datasets: source, license, how they are provided (in the repository or downloaded per the README).
-Confidential data of organizations and personal data are prohibited.
--->
+Барлық өндірістік деректер синтетикалық.
+
+Демонстрациялық есептің болжамдары:
+- 4 самосвал;
+- базалық цикл уақыты — 16 минут;
+- тиімділік коэффициенті — 0.85;
+- ауысым ұзақтығы — 8 сағат.
+
+Нақты кәсіпорынның құпия немесе жеке деректері қолданылмайды.
 
 ## Mine visualization
 
-<!-- Address on the Stand, dashboard or scene; what it shows. -->
+Жергілікті демонстрация:
+- AURUM-31: http://localhost:8765
+- Grafana: http://localhost:3000
+
+Веб-интерфейс карьер картасын, техниканың жағдайын, сценарийлерді және KPI көрсеткіштерін көрсетеді.
 
 ## Limitations
 
+Бұл — өндірістік пайдалануға арналмаған прототип.
+
+Өндіріс көрсеткіштері болжамдық. Нақты кеніштің геологиясы, қауіпсіздік жүйелері және логистикалық шектеулері толық модельденбеген.
+
 ## Presentation
 
-`presentation.pdf` in the repository root. Video (optional): <link>
+`presentation.pdf` — репозиторий түбірінде орналастырылады.
 
 ---
 
