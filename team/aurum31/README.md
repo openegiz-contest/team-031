@@ -1,21 +1,38 @@
-# AURUM-31 — Gold Mine Digital Twin (prototype)
+# AURUM-31 — Gold Mine Digital Twin
 
-Team concept: fictional open-pit gold mine, chief engineer, improve fleet utilization and production. Synthetic assumptions only.
+Interactive digital twin prototype for a fictional gold mine.
 
-## Local demo
+## Requirements
+- Docker and Docker Compose
+- Python 3.9+
+- Python packages: requests, paho-mqtt
 
-Python 3.9+; no dependencies:
+## Run from repository root
 
-```bash
-python team/aurum31/server.py
-```
+1. Start OpenEgiz:
+   make up
 
-Open http://localhost:8765 in your browser. Buttons trigger simulated truck breakdown, road closure, and rain. Export the current estimate as CSV.
+2. Create Python environment:
+   python3 -m venv .venv
+   .venv/bin/pip install requests paho-mqtt
 
-## Model
+3. Start telemetry in one terminal:
+   .venv/bin/python team/aurum31/telemetry.py
 
-Four 55-ton trucks; baseline 16-minute haul cycle; 85% utilization. Approximate tonnes/hour = available trucks × 55 × 60 / cycle_minutes × 0.85. Eight-hour shift estimate. This is an illustrative calculation, not a calibrated mining model.
+4. Start the web server in another terminal:
+   .venv/bin/python team/aurum31/server.py
 
-## Known limitations
+5. Open http://localhost:8765
 
-This is a standalone 2D prototype, **not yet connected** to Eclipse Ditto, MQTT, InfluxDB, Grafana, or the contest Stand. It does not qualify as a finished OpenEgiz submission. No live industrial data or machine-learning predictions. See root `SUBMISSION.md`.
+## Scenarios
+- Normal operation
+- Truck breakdown
+- Road closure
+- Rain
+
+## Architecture
+Python simulator -> MQTT -> Eclipse Ditto
+Web application -> Python HTTP server -> Eclipse Ditto API
+
+## Limitations
+Synthetic data, four simulated trucks. Grafana and InfluxDB integration requires additional validation.
